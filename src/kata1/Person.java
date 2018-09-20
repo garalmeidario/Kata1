@@ -1,14 +1,14 @@
 package kata1;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class Person {
     
     private String name;
-    private Calendar birthdate;
-    private long mili_años = (long) (1000*60*60*24*365.25);
+    private LocalDate birthdate;
     
-    public Person(String name, Calendar birthdate){
+    public Person(String name, LocalDate birthdate){
         this.name = name;
         this.birthdate = birthdate;
     }
@@ -17,18 +17,14 @@ public class Person {
         return name;
     }
 
-    public Calendar getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
     
     public int getYear(){
-        Calendar hoy = Calendar.getInstance();
-        return (int) (getMiliSecond(hoy.getTimeInMillis() - birthdate.getTimeInMillis()));
+        LocalDate hoy = LocalDate.now();
+        return (int) Period.between(birthdate, hoy).getYears();
+    
     }
-    
-    
-    public long getMiliSecond(long milles){
-        return milles / mili_años;
-    }
-    
+       
 }
